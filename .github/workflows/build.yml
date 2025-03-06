@@ -1,0 +1,70 @@
+name: ipo-reminder-bot
+
+on:
+  workflow_dispatch: # Manually trigger the workflow
+  schedule:
+    - cron: '*/5 * * * *' # Runs every 5 minutes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check Build Directory
+        run: ls -l build
+
+      - name: Run the bot
+        run: npm run deploy
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          ADMIN: ${{ secrets.ADMIN }}
+
+      - name: Check for Changes
+        run: |
+          git add .
+          if git diff --quiet HEAD; then
+            echo "No changes detected."
+            echo "changes=false" >> $GITHUB_ENV
+          else
+            echo "Changes detected."
+            echo "changes=true" >> $GITHUB_ENV
+          fi
+
+      - name: Configure Git
+        if: env.changes == 'true'
+        run: |
+          git config --global user.name "Saberika Shrestha"
+          git config --global user.email "saberikashrestha@gmail.com"
+
+      - name: Commit Changes
+        if: env.changes == 'true'
+        run: |
+          git commit -m "Auto-commit: Detected changes"
+
+      - name: Push Changes
+        if: env.changes == 'true'
+        run: |
+          git remote set-url origin https://saberika-shrestha:${{ secrets.GH_PAT }}@github.com/saberika-shrestha/iom-notice-bot.git
+          git push origin HEAD:master
