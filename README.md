@@ -1,6 +1,6 @@
-# 📢 **IPO Reminder Bot**
+# 📢 **IOM Notice Bot**
 
-A lightweight Telegram bot that automatically posts new IPO (Initial Public Offering) updates to a Telegram channel. Built using Node.js and TypeScript, leveraging Telegram's official API without any heavy dependencies.
+A lightweight Telegram bot that automatically posts new results, routines and notices from IOM to a Telegram channel. Built using Node.js and TypeScript, leveraging Telegram's official API without any heavy dependencies.
 
 ## 📌 **Table of Contents**
 
