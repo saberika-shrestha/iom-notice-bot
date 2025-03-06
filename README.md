@@ -5,11 +5,9 @@ A lightweight Telegram bot that automatically posts new results, routines and no
 ## 📌 **Table of Contents**
 
 - [Preview](#preview)
-- [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [How It Works](#how-it-works)
 - [Dependencies](#dependencies)
 - [License](#license)
 - [Contributing](#contributing)
@@ -19,18 +17,6 @@ A lightweight Telegram bot that automatically posts new results, routines and no
 <div align="center">
   <img src="./assets/preview.jpg?raw=true" height="700"/>
 </div>
-
-## 🚀 **Features**
-
-- **Fetches IPO Updates** from `MeroShare API`.
-- **Posts IPOs** to a Telegram channel.
-- **Runs Automatically** at:
-  ```
-  ⏰ 10 AM, 11 AM, 12 PM, 1 PM, 2 PM, 3 PM, 4 PM, 5 PM (Nepal Time)
-  ```
-- **Logs Errors & Activity** in `logs/bot.log`.
-- **Reports Errors** to the admin (your Telegram account).
-- **Uses Only Telegram's Official API** (No heavy npm libraries).
 
 ## ⚙ **Prerequisites**
 
@@ -43,9 +29,9 @@ A lightweight Telegram bot that automatically posts new results, routines and no
 ### 1️⃣ Clone the repository
 
 ```sh
-git clone https://github.com/rohityadav-sas/ipo-reminder-bot.git
+git clone https://github.com/saberika-shrestha/iom-notice-bot.git
 
-cd ipo-reminder-bot
+cd iom-notice-bot
 ```
 
 ### 2️⃣ Install dependencies
@@ -59,12 +45,6 @@ npm install
 Create a `.env` file in the root directory and add the following environment variables
 
 ```sh
-USER=your_meroshare_username
-
-PASSWORD=your_meroshare_password
-
-CLIENT_ID=your_meroshare_client_id
-
 BOT_TOKEN=your_telegram_bot_token
 
 CHANNEL_ID=your_telegram_channel_id
@@ -78,21 +58,11 @@ ADMIN=your_telegram_account_id
 npm start
 ```
 
-## 🔍 **How It Works**
-
-- **Authentication**: The bot logs in using MeroShare API credentials.
-
-- **Fetch IPOs**: It retrieves IPOs from the API and compares them with stored data.
-
-- **Check for New IPOs**: If new IPOs are found, they are saved and posted to Telegram.
-
-- **Post to Telegram**: IPOs are sent to the Telegram channel using the official API.
-
-- **Error Logging & Reporting**: Any errors are logged in `logs/bot.log` and sent to the admin (`70701293`).
-
 ## Dependencies
 
 - **[axios](https://www.npmjs.com/package/axios)** - Promise based HTTP client for the browser and node.js
+  
+- **[cheerio](https://www.npmjs.com/package/cheerio)** - Fast, flexible & lean implementation of core jQuery designed specifically for the server
 
 ## License
 
