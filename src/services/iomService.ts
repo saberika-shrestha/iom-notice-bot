@@ -17,7 +17,7 @@ const fetchNoticesFromTable = async (endpoint: string): Promise<Notice[]> => {
 			const row = $(element);
 			const date = getFormattedDate(row.find('td').eq(0).text().trim());
 			const description = row.find('td').eq(2).text().trim();
-			const url = row.find('td').eq(3).find('a').attr('href') || endpoint;
+			const url = row.find('td').eq(3).find('a').attr('href') || "https://iomexam.edu.np/index.php/news/notice";
 
 			currentNotices.push({ Date: date, Description: description, Url: url });
 		});
